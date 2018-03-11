@@ -1,0 +1,66 @@
+
+mybatiscustom:
+  sqlserver:
+    mapperLocations: classpath:com/dao/mapper/sqlserver/*Mapper.xml
+  mysql:
+    mapperLocations: classpath:com/dao/mapper/mysql/*Mapper.xml
+
+dbinfor:  
+    datasource:  
+        type: com.alibaba.druid.pool.DruidDataSource  
+        sqlserver:  
+           url: jdbc:sqlserver://127.0.0.1:1433;DatabaseName=TestSqlServerDB1
+           username: sa
+           password: huawei123
+           driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+           minIdle: 5  
+           maxActive: 100  
+           initialSize: 10  
+           maxWait: 60000  
+           timeBetweenEvictionRunsMillis: 60000  
+           minEvictableIdleTimeMillis: 300000  
+           validationQuery: select 'x'  
+           testWhileIdle: true  
+           testOnBorrow: false  
+           testOnReturn: false  
+           poolPreparedStatements: true  
+           maxPoolPreparedStatementPerConnectionSize: 50  
+           removeAbandoned: true  
+           filters: stat  
+        mysql01:  
+           url: jdbc:mysql://localhost:3306/testdb1?useUnicode=true&characterEncoding=utf-8  
+           username: admin
+           password: huawei123
+           driver-class-name: com.mysql.jdbc.Driver  
+           minIdle: 5  
+           maxActive: 100  
+           initialSize: 10  
+           maxWait: 60000  
+           timeBetweenEvictionRunsMillis: 60000  
+           minEvictableIdleTimeMillis: 300000  
+           validationQuery: select 'x'  
+           testWhileIdle: true  
+           testOnBorrow: false  
+           testOnReturn: false  
+           poolPreparedStatements: true  
+           maxPoolPreparedStatementPerConnectionSize: 50  
+           removeAbandoned: true  
+           filters: stat  
+        mysql02:  
+           url: jdbc:mysql://localhost:3306/testdb2?useUnicode=true&characterEncoding=utf-8  
+           username: admin
+           password: huawei123
+           driver-class-name: com.mysql.jdbc.Driver  
+           minIdle: 5  
+           maxActive: 100  
+           initialSize: 10  
+           maxWait: 60000  
+           timeBetweenEvictionRunsMillis: 60000  
+           minEvictableIdleTimeMillis: 300000  
+           validationQuery: select 'x'  
+           testWhileIdle: true  
+           testOnBorrow: false  
+           testOnReturn: false  
+           poolPreparedStatements: true  
+           maxPoolPreparedStatementPerConnectionSize: 50  
+           removeAbandoned: true

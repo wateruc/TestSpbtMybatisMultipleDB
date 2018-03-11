@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.waterpc.test.sbootmybatismultipledbdemo.dao.mysql.UsersInforEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.waterpc.test.sbootmybatismultipledbdemo.entity.UsersInforEntity" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="identifyCode" property="identifycode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, age, country, identifyCode
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from users_infor
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from users_infor
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.waterpc.test.sbootmybatismultipledbdemo.entity.UsersInforEntity" useGeneratedKeys="true" keyProperty="id" >
+    insert into users_infor (name, age, country, 
+      identifyCode)
+    values (#{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{country,jdbcType=VARCHAR}, 
+      #{identifycode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.waterpc.test.sbootmybatismultipledbdemo.entity.UsersInforEntity" useGeneratedKeys="true" keyProperty="id" >
+    insert into users_infor
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="country != null" >
+        country,
+      </if>
+      <if test="identifycode != null" >
+        identifyCode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="country != null" >
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="identifycode != null" >
+        #{identifycode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.waterpc.test.sbootmybatismultipledbdemo.entity.UsersInforEntity" >
+    update users_infor
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="country != null" >
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="identifycode != null" >
+        identifyCode = #{identifycode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.waterpc.test.sbootmybatismultipledbdemo.entity.UsersInforEntity" >
+    update users_infor
+    set name = #{name,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      country = #{country,jdbcType=VARCHAR},
+      identifyCode = #{identifycode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

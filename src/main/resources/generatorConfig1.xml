@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+  
+<generatorConfiguration>
+
+<!-- 可以用于加载配置项或者配置文件，在整个配置文件中就可以使用${propertyKey}的方式来引用配置项
+    resource：配置资源加载地址，使用resource，MBG从classpath开始找，比如com/myproject/generatorConfig.properties        
+    url：配置资源加载地址，使用URL的方式，比如file:///C:/myfolder/generatorConfig.properties.
+    注意，两个属性只能选址一个;
+
+    另外，如果使用了mybatis-generator-maven-plugin，那么在pom.xml中定义的properties都可以直接在generatorConfig.xml中使用
+ -->
+	<properties resource="dbinfo2mybatisgenerator.properties"/>
+
+	<!--数据库驱动 -->
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+	 
+	 	<!-- 生成的Java文件的编码 -->
+    	<property name="javaFileEncoding" value="UTF-8"/>
+	 
+	 	<!-- 去除自动生成的注释 -->
+		<commentGenerator>
+			<property name="suppressDate" value="true" />
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		
+		<!-- 数据库链接URL、用户名、密码 -->   
+        <jdbcConnection driverClass="${sqlserverDB1.driverclassname}"    
+            connectionURL="${sqlserverDB1.url}"    
+            userId="${sqlserverDB1.username}"    
+            password="${sqlserverDB1.pwd}">   
+        </jdbcConnection>
+        
+        <!--  默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer      
+            true，把JDBC DECIMAL 和 NUMERIC 类型解析为java.math.BigDecimal  -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!--生成Model类存放位置.targetPackage表示生成的包名，targetProject表示生成的文件放置在工程的哪个目录下，合起来构成整体路径 -->
+		<javaModelGenerator targetPackage="com.waterpc.test.sbootmybatismultipledbdemo.entity"
+			targetProject="./src/main/java">
+			<!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		
+		<!--生成xml文件存放位置 -->
+		<sqlMapGenerator targetPackage="com.dao.mapper.sqlserver"
+			targetProject="./src/main/resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<!--生成Mapper类存放位置 -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.waterpc.test.sbootmybatismultipledbdemo.dao.sqlserver"
+			targetProject="./src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		<!--生成对应表及类名 -->
+		<table tableName=""></table>
+		<!-- <table tableName="ArticleInfor" domainObjectName="ArticleInforEntity"
+			enableInsert="true"
+             enableSelectByPrimaryKey="true" enableUpdateByPrimaryKey="true"
+             enableDeleteByPrimaryKey="true" 
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<generatedKey column="id" sqlStatement="JDBC" identity="true"/>
+		</table> -->
+
+	</context>
+
+</generatorConfiguration>

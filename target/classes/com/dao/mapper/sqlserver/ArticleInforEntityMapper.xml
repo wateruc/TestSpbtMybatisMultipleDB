@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.waterpc.test.sbootmybatismultipledbdemo.dao.sqlserver.ArticleInforEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.waterpc.test.sbootmybatismultipledbdemo.entity.ArticleInforEntity" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="author" property="author" jdbcType="NVARCHAR" />
+    <result column="title" property="title" jdbcType="NVARCHAR" />
+    <result column="summary" property="summary" jdbcType="NVARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, author, title, summary, createTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ArticleInfor
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ArticleInfor
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.waterpc.test.sbootmybatismultipledbdemo.entity.ArticleInforEntity" useGeneratedKeys="true" keyProperty="id" >
+    insert into ArticleInfor (author, title, summary, 
+      createTime)
+    values (#{author,jdbcType=NVARCHAR}, #{title,jdbcType=NVARCHAR}, #{summary,jdbcType=NVARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.waterpc.test.sbootmybatismultipledbdemo.entity.ArticleInforEntity" useGeneratedKeys="true" keyProperty="id" >
+    insert into ArticleInfor
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="author != null" >
+        author,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="summary != null" >
+        summary,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="author != null" >
+        #{author,jdbcType=NVARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=NVARCHAR},
+      </if>
+      <if test="summary != null" >
+        #{summary,jdbcType=NVARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.waterpc.test.sbootmybatismultipledbdemo.entity.ArticleInforEntity" >
+    update ArticleInfor
+    <set >
+      <if test="author != null" >
+        author = #{author,jdbcType=NVARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=NVARCHAR},
+      </if>
+      <if test="summary != null" >
+        summary = #{summary,jdbcType=NVARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.waterpc.test.sbootmybatismultipledbdemo.entity.ArticleInforEntity" >
+    update ArticleInfor
+    set author = #{author,jdbcType=NVARCHAR},
+      title = #{title,jdbcType=NVARCHAR},
+      summary = #{summary,jdbcType=NVARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
